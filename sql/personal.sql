@@ -1,0 +1,5 @@
+-- PENDIENTE: definir la tabla public.personal.
+-- Obligatorios: identidad (clave primaria o única), nombres y apellidos,
+-- género, teléfono y dirección.
+-- Conservar identidad y teléfono como texto.
+-- Definir acceso para los usuarios del sistema.

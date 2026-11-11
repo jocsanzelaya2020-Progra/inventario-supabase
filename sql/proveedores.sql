@@ -1,0 +1,4 @@
+-- PENDIENTE: definir la tabla public.proveedores.
+-- Obligatorios: código autogenerado o serial, empresa, representante o encargado,
+-- teléfono, dirección de empresa y correo electrónico.
+-- Definir acceso para los usuarios del sistema.

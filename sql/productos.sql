@@ -1,0 +1,3 @@
+-- PENDIENTE: definir la tabla public.productos.
+-- Campos del proyecto: id, nombre, cantidad, precio y creado_en.
+-- Definir acceso para los usuarios del sistema.
