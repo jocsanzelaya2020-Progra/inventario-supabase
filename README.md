@@ -1,43 +1,60 @@
-# Sistema de Inventario Web con Supabase
+# Base de datos — Sistema de Inventario
 
-Estructura inicial para un equipo de tres personas, basada en la rúbrica de Traductores e Intérpretes II, Parcial II.
+## Contenido
+- `bd_sistema_inventario.sql`: crea la base de datos, sus 12 tablas, claves foráneas, índices, datos iniciales y vistas.
 
-**Esta entrega contiene únicamente archivos base y comentarios de tareas. No implementa módulos, tablas ni conexión; todavía no constituye un sistema funcional ni cumple la evaluación por sí sola.**
+## Requisitos
+- MySQL 8.0 o superior.
+- MySQL Workbench, phpMyAdmin o cliente MySQL.
 
-## Archivos
+## Cómo instalar
+1. Abrir MySQL Workbench y conectarse al servidor.
+2. Abrir el archivo `bd_sistema_inventario.sql`.
+3. Ejecutar el script completo.
+4. Actualizar el panel **Schemas** y comprobar que aparece `bd_sistema_inventario`.
 
-| Archivo o carpeta | Uso previsto |
-| --- | --- |
-| index.html | Inicio y enlace al login |
-| login.html | Formulario de autenticación |
-| inventario.html | Formulario y tabla de productos |
-| personal.html | Formulario y tabla de personal |
-| proveedores.html | Formulario y tabla de proveedores |
-| app.js | Conexión Supabase e integración compartida |
-| css/styles.css | Estética neón y diseño responsivo |
-| js/auth.js | Autenticación y sesión |
-| js/inventario.js | CRUD de productos |
-| js/personal.js | Registro y listado de personal |
-| js/proveedores.js | Registro y consulta de proveedores |
-| js/notificaciones.js | Alertas visuales compartidas |
-| sql/ | Definiciones pendientes de las tres tablas |
-| docs/equipo.md | Reparto sugerido y coordinación |
+También puede ejecutarse desde la terminal:
 
-## Criterios de evaluación
+```bash
+mysql -u root -p < bd_sistema_inventario.sql
+```
 
-- Participación y asistencia: 5%.
-- Repositorio público ordenado, commits claros, Vercel activo y conexión Supabase en app.js: 15%.
-- Login funcional y flujo index.html → login.html → inventario.html: 15%.
-- Inventario responsivo, CRUD y notificaciones visuales: 20%.
-- Personal, tabla SQL, interfaz, registro y listado: 22.5%.
-- Proveedores, tabla SQL, interfaz, registro y consulta mediante integración en app.js: 22.5%.
+## Tablas incluidas
+1. `roles`
+2. `usuarios`
+3. `categorias`
+4. `proveedores`
+5. `productos`
+6. `almacenes`
+7. `inventario`
+8. `compras`
+9. `detalle_compras`
+10. `ventas`
+11. `detalle_ventas`
+12. `movimientos_inventario`
 
-## Preparación del repositorio
+## Vistas incluidas
+- `vw_inventario_actual`: existencia por producto y almacén, con indicador de stock bajo.
+- `vw_ventas_resumen`: resumen de ventas con el usuario que registró cada operación.
 
-1. Extraer el ZIP y subir el CONTENIDO de inventario-supabase al repositorio público. index.html debe quedar en la raíz.
-2. Agregar como colaboradores a los dos compañeros.
-3. Cada integrante trabaja en su rama y propone sus cambios mediante un pull request.
-4. Revisar e integrar en main antes de conectar el repositorio a Vercel.
-5. Completar todos los archivos y registrar en este README los enlaces finales del repositorio y del despliegue.
+## Relaciones principales
+- Un rol puede estar asignado a muchos usuarios.
+- Una categoría puede contener muchos productos.
+- Un producto puede tener existencias en distintos almacenes.
+- Una compra pertenece a un proveedor y a un usuario; contiene varios detalles.
+- Una venta pertenece a un usuario; contiene varios detalles.
+- Los movimientos registran producto, almacén, usuario, tipo y cantidad.
 
-La rúbrica no exige un framework, un package.json ni un vercel.json; no se agregan para esta estructura HTML/CSS/JavaScript.
+## Importante para el equipo
+Este repositorio contiene únicamente la parte de base de datos. La actualización automática de existencias al recibir compras, completar ventas o anular operaciones debe implementarse con transacciones en el backend o mediante procedimientos y triggers acordados por el equipo.
+
+No guardar contraseñas en texto plano. El backend debe almacenar hashes seguros (por ejemplo, Argon2 o bcrypt) en `usuarios.contrasena`.
+
+## Trabajo en Git
+Agregar esta carpeta al repositorio compartido y realizar commit:
+
+```bash
+git add BaseDeDatos/
+git commit -m "Agregar base de datos del sistema de inventario"
+git push
+```
