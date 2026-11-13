@@ -3,11 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal | Inventario Supabase</title>
+    <title>Personal - Panel Neón</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
-    <!-- PENDIENTE: Crear formulario de identidad, nombres, apellidos, género, teléfono y dirección; agregar tabla responsiva. -->
-    <!-- Agregar navegación compartida y los scripts necesarios al implementar. -->
+
+<!-- min-h-screen + flex + flex-col + md:flex-row: Estructura adaptable (columna en móvil, fila con barra lateral en PC) -->
+<body data-module="personal" class="min-h-screen flex flex-col md:flex-row">
+
+    <!-- Menú Lateral -->
+    <aside class="sidebar w-full md:w-64 p-5 flex flex-col justify-between shrink-0">
+        <div>
+            <div class="flex items-center justify-between mb-8">
+                <h1 class="text-base font-bold text-sky-400">📦 EJIC Studio</h1>
+            </div>
+            <nav class="space-y-2 text-sm">
+                <a href="index.html" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition">
+                    <span>🏠</span> <span>Inicio</span>
+                </a>
+                <a href="inventario.html" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800">
+                    <span>📦</span> <span>Inventario</span>
+                </a>
+                <a href="personal.html" aria-current="page" class="block px-3 py-2.5 rounded-lg bg-sky-500/10 text-sky-400">Personal</a>
+                <a href="proveedores.html" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800">Proveedores</a>
+            </nav>
+        </div>
+        <div class="hidden md:block pt-4 border-t border-slate-800 text-xs text-slate-500">
+            Traductores e Intérpretes II
+        </div>
+    </aside>
+
+    <!-- Contenedor Principal del Panel -->
+    <div class="flex-1 min-w-0 flex flex-col min-h-screen">
+        <header class="bg-slate-900/60 border-b border-sky-500/10 p-4 flex justify-between items-center">
+            <span class="text-xs text-slate-400">Gestión de personal</span>
+            <button type="button" id="logout" class="text-sm text-sky-300">Cerrar sesión</button>
+        </header>
+        <p id="sessionStatus" class="p-4 text-sm text-slate-300" role="status">Verificando sesión…</p>
+
+        <!-- 
+          GRID ADAPTABLE:
+          - grid-cols-1: En celulares, muestra las secciones una debajo de otra (1 columna).
+          - lg:grid-cols-3: En pantallas grandes (lg), divide el espacio en 3 columnas (1 para el formulario, 2 para la tabla).
+        -->
+        <main id="panel" hidden class="flex-1 p-4 md:p-6 grid grid-cols-1 xl:grid-cols-3 gap-6">
+            <section class="neon-card p-6 rounded-xl h-fit">
+                <h2 class="text-lg font-semibold mb-4 text-sky-400">Registrar personal</h2>
+                <form id="recordForm" class="space-y-4">
+                    <div>
+                        <label for="identidad" class="block text-sm text-slate-400">Identidad</label>
+                        <input id="identidad" name="identidad" type="text" maxlength="40" required class="w-full mt-1 p-2 rounded-lg neon-input">
+                    </div>
+                    <div>
+                        <label for="nombres" class="block text-sm text-slate-400">Nombres</label>
+                        <input id="nombres" name="nombres" type="text" maxlength="100" required class="w-full mt-1 p-2 rounded-lg neon-input">
+                    </div>
+                    <div>
+                        <label for="apellidos" class="block text-sm text-slate-400">Apellidos</label>
+                        <input id="apellidos" name="apellidos" type="text" maxlength="100" required class="w-full mt-1 p-2 rounded-lg neon-input">
+                    </div>
+                    <div>
+                        <label for="genero" class="block text-sm text-slate-400">Género</label>
+                        <input id="genero" name="genero" type="text" maxlength="40" required class="w-full mt-1 p-2 rounded-lg neon-input">
+                    </div>
+                    <div>
+                        <label for="telefono" class="block text-sm text-slate-400">Teléfono</label>
+                        <input id="telefono" name="telefono" type="tel" maxlength="40" required class="w-full mt-1 p-2 rounded-lg neon-input">
+                    </div>
+                    <div>
+                        <label for="direccion" class="block text-sm text-slate-400">Dirección</label>
+                        <input id="direccion" name="direccion" type="text" maxlength="250" required class="w-full mt-1 p-2 rounded-lg neon-input">
+                    </div>
+                    <button type="submit" class="w-full rounded-lg p-2 font-semibold neon-btn">Guardar</button>
+                </form>
+            </section>
+            <section class="neon-card min-w-0 p-6 rounded-xl xl:col-span-2 overflow-x-auto">
+                <h2 class="text-lg font-semibold mb-4 text-sky-400">Personal registrado</h2>
+                <table class="w-full text-left">
+                    <thead class="border-b border-slate-700 text-sm text-slate-300">
+                        <tr>
+                            <th scope="col" class="p-2">Identidad</th>
+                            <th scope="col" class="p-2">Nombres</th>
+                            <th scope="col" class="p-2">Apellidos</th>
+                            <th scope="col" class="p-2">Género</th>
+                            <th scope="col" class="p-2">Teléfono</th>
+                            <th scope="col" class="p-2">Dirección</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recordTableBody" class="divide-y divide-slate-800 text-sm"></tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
 </body>
 </html>

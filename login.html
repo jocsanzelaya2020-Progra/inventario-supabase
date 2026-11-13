@@ -3,11 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión | Inventario Supabase</title>
+    <title>Iniciar sesión - Sistema de Inventario</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <link rel="stylesheet" href="css/styles.css">
+    <script src="app.js" defer></script>
 </head>
-<body>
-    <!-- PENDIENTE: Crear el formulario de usuario y contraseña y conectarlo con js/auth.js. -->
-    <!-- Agregar navegación compartida y los scripts necesarios al implementar. -->
+<body class="min-h-screen grid place-items-center p-4">
+    <main class="neon-card w-full max-w-md rounded-xl p-6 md:p-8">
+        <a href="index.html" class="text-sm text-sky-300">Volver al inicio</a>
+        <h1 class="neon-title my-5 text-2xl font-bold text-sky-400">Iniciar sesión</h1>
+        <form id="loginForm" method="post" class="space-y-4">
+            <div>
+                <label for="email" class="block text-sm text-slate-300">Correo electrónico</label>
+                <input id="email" name="email" type="email" autocomplete="username" required class="neon-input mt-1 w-full rounded-lg p-2">
+            </div>
+            <div>
+                <label for="password" class="block text-sm text-slate-300">Contraseña</label>
+                <input id="password" name="password" type="password" autocomplete="current-password" required class="neon-input mt-1 w-full rounded-lg p-2">
+            </div>
+            <button type="submit" class="neon-btn w-full rounded-lg p-2 font-semibold">Ingresar</button>
+            <p id="loginStatus" role="status" class="text-sm text-slate-300"></p>
+        </form>
+    </main>
 </body>
 </html>

@@ -2,12 +2,53 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio | Inventario Supabase</title>
+    <meta name = "viewport" content="width-width, initial-scale=1.0">
+    <title>Inicio - Sistema de Inventario </title>
+    <!-- Cargamos tailwindcss CSS desde su biblioteca de nube  -->
+    <script src="https://cdn.tailwindcss.com/"></script>
+    
     <link rel="stylesheet" href="css/styles.css">
+
 </head>
-<body>
-    <!-- PENDIENTE: Crear la pantalla de inicio con enlace a login.html. -->
-    <!-- Agregar navegación compartida y los scripts necesarios al implementar. -->
+<!--
+min-h-screen: Ocupa toda la altura
+flex flex-col md:flex-row>: Columna en celular, fija en PC(menu izquierda)
+-->
+<body class="min-h-screen flex flex-col md:flex-row">
+   <!--Menu Lateral izquier(Sidebar)-->
+   <aside class="sidebar w-full md:w-64 p-5 flex flex-col justify-between shrink-0 " >
+        <div>
+            <div class="flex items-center justify-between mb-8">
+                <h1 class="text-base font-bold text-sky-400"> 🚀 Traductores e Intérpretes II </h1>
+                <!-- Boton de login para vista de dispositivos mobiles -->
+                <a href="login.html" class="md:hidden font-bold text-xs bg-sky-500/10 text-sky-300 border border-sky-500/30 px-2.5 py-1 rounded-lg">Login</a>
+            </div>
+
+                 <!-- Enlaces de navegacion del Menu-->
+            <nav class="space-y-2 text-sm">
+                    <span>🏠</span> <span>Inicio</span>
+                <a href="login.html" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition">
+                    <span>🔐</span> <span>Iniciar sesión</span>
+                </a>
+            </nav>
+        </div>
+    </aside>
+    <!-- contenido central con mensaje -->
+     <main class="flex-1 p-6 flex items-center justify-center">
+        <div class="max-w-xl w-full neon-card p-8 rounded-2xl text-center space-y-6">
+            <span class="text-4xl">🚀</span>
+
+            <!--  Titulo del mensaje -->
+            <h2 class="text-2xl md:text-3xl font-extrabold text-sky-400 neon-title leading-snug">
+                Bienvenido a nuestra Web Traductores e Intérpretes II
+            </h2>
+
+            <p class="text-slate-400 text-sm leading-relaxed">
+                Gestiona productos, personal y proveedores desde el panel de inventario.
+            </p>
+            <a href="login.html" class="neon-btn inline-block rounded-lg px-5 py-2 font-semibold text-white">Iniciar sesión</a>
+        </div>
+     </main>
 </body>
+
 </html>
